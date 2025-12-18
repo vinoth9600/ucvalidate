@@ -1,25 +1,55 @@
-<form id="userRegistrationForm" action="#" method="post">
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Registration</title>
+
+  <style>
+    /* Popup background */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    /* Popup box */
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<form id="userRegistrationForm">
+
   <label for="firstName">First Name:</label><br>
-  <input 
-    type="text" 
-    id="firstName" 
-    name="firstName"
-  >
+  <input type="text" id="firstName" name="firstName">
   <br><br>
 
   <label for="lastName">Last Name:</label><br>
-  <input 
-    type="text" 
-    id="lastName" 
-    name="lastName"
-  >
+  <input type="text" id="lastName" name="lastName">
   <br><br>
 
   <label for="phoneNumber">Phone Number:</label><br>
-  <input 
-    type="tel" 
-    id="phoneNumber" 
+  <input
+    type="tel"
+    id="phoneNumber"
     name="phoneNumber"
     required
     pattern="[0-9]{10}"
@@ -27,22 +57,43 @@
   >
   <br><br>
 
-  <input 
-    type="checkbox" 
-    id="acceptTerms" 
+  <input
+    type="checkbox"
+    id="acceptTerms"
     name="acceptTerms"
     required
   >
-  <label for="acceptTerms">
-    I accept the Terms and Conditions
-  </label>
+  <label for="acceptTerms">I accept the Terms and Conditions</label>
   <br><br>
 
-  <button 
-    type="submit" 
-    id="submitButton"
-  >
-    Submit
-  </button>
+  <button type="submit" id="submitButton">Submit</button>
 
 </form>
+
+<!-- Success Popup -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <h3>✅ Success</h3>
+    <p>Form submitted successfully!</p>
+    <button class="close-btn" onclick="closeModal()">OK</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById("userRegistrationForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent page reload
+
+    // If HTML5 validation passes
+    if (this.checkValidity()) {
+      document.getElementById("successModal").style.display = "block";
+      this.reset(); // Optional: reset form after submit
+    }
+  });
+
+  function closeModal() {
+    document.getElementById("successModal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
